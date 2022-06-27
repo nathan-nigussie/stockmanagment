@@ -1,0 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap');
+
+/*add product page formattting */
+
+/*add product page formattting */
+:root{
+--green:#0c5635b2;
+--blue:#1665ba;
+--golden:#0f0e0a;
+}
+*{
+font-family: 'Poppins', sans-serif;
+margin:0; padding:0;
+box-sizing: border-box;
+outline: none; border:none;
+text-decoration: none;
+text-transform: capitalize;
+transition:all .2s linear;
+transition:width none;
+}
+
+/*formatting for heading section of add product page */
+.header .header-1{
+background:#fff;
+padding:1.5rem 9%;
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+.header .header-2{
+background:var(--blue);
+height:3rem;
+}
+
+/*formatting for select option of add product page*/
+.select.container{
+background-color: rgba(189, 207, 212, 0.226);
+width:90%;
+height:14rem;
+margin-left: 5.8rem;
+}
+.reminder{
+font-size:smaller;
+margin-left:10rem; 
+
+color:rgb(228, 79, 9);
+}
+
+/*formatting for main product add form of  product page*/
+#product_form{
+margin-top:2.5rem;
+float: left;
+}
+
+input {
+flex: 0 0 200px;
+margin-left: 5px;
+}
+
+label {
+text-align: left;
+margin-left: 5rem;
+flex-direction: row;
+width: 400px;
+line-height: 26px;
+margin-bottom: 10px;
+}
+
+/*formatting for buttons on product list and app product page*/
+.btn.btn-warning{
+padding:0.4rem;
+}
+.btn.btn-danger{
+margin-top: 1rem;
+margin-bottom: 1rem;
+}
+.save.button{
+float: center;
+margin-top: 1.5rem;
+margin-left: 5rem;
+}
+
+/*Product list page format*/
+#no-Product-To-Display{
+   margin-left:2rem;
+   font-size:smaller;
+   width:20%;
+   background: no-repeat;
+   background-position: center;
+   height:20rem;
+   background-image: url("../images/no-product-information.png")
+}
+
+#warning-notice{
+
+ margin-left:2rem;
+   width:96%;
+   height:3.5rem;
+   margin-bottom: 2rem;
+}
+
+#delete-success-msg{
+ margin-left:2rem;
+   width:96%;
+   height:3.5rem;
+   margin-bottom: 2rem;
+}
+.delete-checkbox{
+float: left;
+margin-bottom: 7rem;
+}
+
+.card{
+margin-bottom: 2rem;
+}
+.heading.productlist{
+margin: 1em 1em 1em 1em;
+}
+.row.text-center{
+margin: 2em 1em 1em 1em; 
+}
+.btn-productlist{
+margin-left:85%;
+margin-right: 0%;
+}
+
+
+/* media queries  */
+@media (max-width:991px){
+html{
+font-size: 55%;
+}
+.header .header-1{
+padding:2rem;
+}
+section{
+padding:3rem 2rem;
+}
+} 
+@media (max-width:768px){
+html{
+scroll-padding-top: 0;
+}
+body{
+padding-bottom: 6rem;
+}
+.header .header-2{
+display:none;
+}
+.header .header-1{
+box-shadow: var(--box-shadow);
+position: relative;
+}
+}
+@media (max-width:450px){
+html{
+font-size: 50%;
+}
+}
