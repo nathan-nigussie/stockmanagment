@@ -14,6 +14,7 @@ function myNewFunction() {
         
    </div>
       <span class="reminder">"Please provide product size in Megabyte(MB)"</span>
+      
 </div>
 `;
    } else if(selectedProduct==="Furniture") {
@@ -30,7 +31,7 @@ function myNewFunction() {
 <div class="form-group row">
    <label for="inputweight" class="col-sm-2 col-form-label">Length(CM):</label>
    <div class="col-sm-6">
-      <input type="number"  autocomplete="off"  placeholder="#length" id="height" name="length"
+      <input type="number"  autocomplete="off"  placeholder="#length" id="length" name="length"
          class="form-control form-control-sm" required>
    </div>
 </div>
@@ -57,6 +58,7 @@ function myNewFunction() {
    </div>
    
     <span class="reminder">"Please provide product weight in Kilog(KG)"</span>
+   
 </div>
 `;
    }
