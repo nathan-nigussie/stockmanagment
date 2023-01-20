@@ -6,7 +6,7 @@ it is accesible by an URL containing two pages for:
 
 The link for the project is as follows:
 
-https://juniortestbogaletolosa.000webhostapp.com/
+https://juniortestnathantolosa.000webhostapp.com
 
 # 1. Adding a product page
 The Product add UI it  has a dynamic form input which showsup when a user selects specific product type. It is shown on the following pictures.
