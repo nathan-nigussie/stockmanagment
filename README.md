@@ -8,7 +8,7 @@ The link for the project is as follows:
 
 https://juniortestnathantolosa.000webhostapp.com
 
-# 1. Adding a product page
+# 1.Product add page
 The Product add UI it  has a dynamic form input which showsup when a user selects specific product type. It is shown on the following pictures.
 
 
