@@ -133,7 +133,7 @@ myForm.addEventListener("submit",(event) => {
 
             const errorMessage=`*${field.name} is required!*`;
             if(!errorDiv||!errorDiv.classList.contains('invalid-feedback')) {
-
+                errorDiv.remove();
                 input.insertAdjacentHTML('afterend',`<div class="invalid-feedback">${errorMessage}</div>`);
             }
             input.classList.add("is-invalid");
