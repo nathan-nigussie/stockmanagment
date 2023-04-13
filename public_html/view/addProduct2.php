@@ -59,7 +59,7 @@ error_reporting(E_ALL ^ E_NOTICE);
                             value="<?php echo isset($_SESSION['sku']) ? $_SESSION['sku'] : '' ?>">
                         <span id="sku-error" class="myerror"></span>
 
-                        <br><br>
+                        <br>
 
 
                     </div>
@@ -72,7 +72,7 @@ error_reporting(E_ALL ^ E_NOTICE);
                             placeholder='#name' utocapitalize="off" class="form-control form-control-lg">
                         <span id="sku-error" class="myerror"></span>
 
-                        <br><br>
+                        <br>
                     </div>
 
                 </div>
@@ -88,7 +88,7 @@ error_reporting(E_ALL ^ E_NOTICE);
 
                         </span>
 
-                        <br><br>
+                        <br>
                     </div>
                 </div>
 

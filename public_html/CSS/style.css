@@ -44,7 +44,7 @@ padding-top: 1.3rem;
 }
 .select.container2{
 background-color: rgba(189, 207, 212, 0.226);
-width:71%;
+width: 71%;
 height:2rem;
 margin-left: 13.8rem;
 margin-bottom: 0.5rem;
@@ -72,13 +72,17 @@ border-radius: 3px;
    display: inline-block;
    width:110px;
 }
-/* color:rgb(53, 12, 93); */
+
+.select-container .detailsSection .invalid-feedback{
+   margin-left: 125px;
+}
 
 
 /*formatting for main product add form of  product page*/
 #product_form{
 margin-top:2.5rem;
 float: left;
+width:fit-content;
 }
 
 input {

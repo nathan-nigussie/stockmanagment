@@ -11,38 +11,44 @@ const productProperties={
             label: "Weight (kg):",
             id: "weight",
             placeholder: "#weight",
-            unit: "Kilogram(Kg)"
+            unit: "Kilogram(Kg)",
+            format: "Weight in  Kg"
         },
     ],
     dvd: [{
         name: "size",label: "Size  (MB):",id: "dvd",placeholder: "#size",
-        unit: "Megabyte(MB)"
+        unit: "Megabyte(MB)",
+        format: "size in  MegaByte"
     }],
     furniture: [
+
         {
             name: "height",
             label: "Height (cm):",
             id: "height",
             placeholder: "#height",
-            unit: "Cm"
+            unit: "Cm",
+            format: "dimension in  HxLxW format"
         },
         {
             name: "width",label: "Width (cm):",id: "width",placeholder: "#width",
-            unit: "Cm"
+            unit: "Cm",
+            format: "dimension in  HxLxW format"
         },
         {
             name: "length",
             label: "Length (cm):",
             id: "length",
             placeholder: "#length",
-            unit: "Cm"
+            unit: "Cm",
+            format: "dimension in  HxLxW format"
         },
     ],
 };
 
 // Get the form and dynamic fields container
 const myForm=document.getElementById("productForm");
-const dynamicFields=document.getElementById("detailsSection");
+const detailsSection=document.getElementById("detailsSection");
 
 // Listen for changes to the product type select input
 document.getElementById("product_type").addEventListener("change",() => {
@@ -55,12 +61,12 @@ document.getElementById("product_type").addEventListener("change",() => {
 
 
     // Add the required fields as dynamic inputs
+
+
     requiredFields.forEach((field) => {
         const input=document.createElement("input");
         const label=document.createElement("label");
-        const span=document.createElement("span");
         label.textContent=field.label;
-        span.textContent=`**please provide ${field.name} in ${field.unit}**`;
 
         // Get a reference to the span element
         input.type="number";
@@ -70,14 +76,23 @@ document.getElementById("product_type").addEventListener("change",() => {
         input.classList.add("form-control-sm");
         input.className="dynamicInput";
         label.className="dynamicLabel";
-        span.className="reminder";
 
         // Add the input element to the dynamic fields container
 
         detailsSection.appendChild(label);
         detailsSection.appendChild(input);
-        detailsSection.appendChild(span);
     });
+    const span=document.createElement("span");
+    detailsSection.className="col-sm-8";
+    span.className="reminder";
+    //accessing last index of required fields for implimenting helper text
+
+    lastItem=requiredFields[requiredFields.length-1];
+    //helper text for each specific product attrbiutes
+    span.textContent=`**please provide  ${lastItem.format}**`;
+    detailsSection.appendChild(span);
+
+
 
 });
 
@@ -98,8 +113,9 @@ myForm.addEventListener("submit",(event) => {
     const productType=myForm.product_type.value;
     const requiredFields=productProperties["common"];
     const productTypeFields=productProperties[productType];
-
-    let filter=productProperties["common"];
+    let filter=[];
+    filter.length=0;
+    filter=productProperties["common"];
 
     if(productType) {
         //  filter.length=0;
@@ -108,7 +124,6 @@ myForm.addEventListener("submit",(event) => {
         console.log("filter",filter);
     }
     //console.log("pushed",requiredFields);
-
 
 
 
@@ -123,8 +138,8 @@ myForm.addEventListener("submit",(event) => {
     //looping through the required fields of each products
     filter.forEach((field) => {
         const input=myForm[field.name];
-        console.log("input.value",input.value);
-        var invalidChar=/[^A-Za-z0-9]/;
+
+        var invalidChar=/[^A-Za-z0-9-]/;
 
         if(!input.value) {
 
@@ -138,7 +153,6 @@ myForm.addEventListener("submit",(event) => {
             }
             input.classList.add("is-invalid");
             missingFields=true;
-            event.preventDefault();
         }
         else if(input.value) {
             if(invalidChar.test(input.value)) {
@@ -159,6 +173,7 @@ myForm.addEventListener("submit",(event) => {
                     errorDiv.remove();
                 }
                 input.classList.remove('is-invalid');
+
             }
         }
 
@@ -167,6 +182,8 @@ myForm.addEventListener("submit",(event) => {
     });
     if(missingFields) {
         event.preventDefault();
+
+
         const firstError=document.querySelector(".is-invalid");
         if(firstError) {
             firstError.scrollIntoView({behavior: "smooth",block: "center"});
@@ -181,9 +198,11 @@ dropdown.addEventListener("change",function() {
     error.innerHTML="";
 });
 
-var dropdown=document.getElementsByName("product_type")[0];
 
-dropdown.addEventListener("change",function() {
-    filter.length=0;
 
-});
+// var dropdown=document.getElementsByName("product_type")[0];
+
+// dropdown.addEventListener("change",function() {
+//     filter.length=0;
+
+// });
