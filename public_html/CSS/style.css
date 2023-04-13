@@ -30,21 +30,50 @@ justify-content: space-between;
 .header .header-2{
 background:var(--blue);
 height:3rem;
+margin-bottom: 2rem;
 }
 
 /*formatting for select option of add product page*/
 .select.container{
 background-color: rgba(189, 207, 212, 0.226);
 width:90%;
-height:14rem;
+height:15rem;
 margin-left: 5.8rem;
-}
-.reminder{
-font-size:smaller;
-margin-left:10rem; 
+padding-top: 1.3rem;
 
-color:rgb(228, 79, 9);
 }
+.select.container2{
+background-color: rgba(189, 207, 212, 0.226);
+width:71%;
+height:2rem;
+margin-left: 13.8rem;
+margin-bottom: 0.5rem;
+}
+
+.reminder{
+display: block;
+font-size:smaller;
+margin-left:13rem; 
+color:orangered;
+font-style: italic;
+}
+.dynamicInput{
+
+border: #1665ba;
+width:20rem;
+margin-top: 0rem;
+padding-top: 0rem;
+border: solid 1px #c0c4c881;
+border-radius: 3px;
+}
+.dynamicLabel{
+   color:#048d4f;
+   margin-right: 20px;
+   display: inline-block;
+   width:110px;
+}
+/* color:rgb(53, 12, 93); */
+
 
 /*formatting for main product add form of  product page*/
 #product_form{
@@ -57,7 +86,8 @@ flex: 0 0 200px;
 margin-left: 5px;
 }
 .myerror{
-   color: #FF0000;
+   color: #f42653;
+   width:25rem;
 }
 
 label {
@@ -93,6 +123,7 @@ margin-left: 5rem;
    height:10rem;
    
 }
+
 
 #warning-notice{
 

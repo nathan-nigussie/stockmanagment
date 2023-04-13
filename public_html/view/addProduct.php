@@ -1,6 +1,6 @@
 <?php
 include_once "../controller/post.php";
-session_start();
+
 error_reporting(E_ALL ^ E_NOTICE);
 ?>
 
@@ -43,21 +43,10 @@ error_reporting(E_ALL ^ E_NOTICE);
     </header>
     <!-- header section ends here  -->
 
-    <!-- session div starts here  -->
-    <?php
-if (isset($_SESSION['status'])) {
-    ?>
-    <?php echo $_SESSION['status']; ?>
 
-
-    <?php
-
-    unset($_SESSION['status']);
-}
-?>
     <!-- form  section starts here -->
     <div class="container">
-        <form id="product_form" class="w-50" method="POST"
+        <form id="productForm" class="w-50" method="POST"
             action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
             <div class="form-group row">
                 <div class="form-group row">
@@ -65,10 +54,10 @@ if (isset($_SESSION['status'])) {
                     <label for="inputPassword" class="col-sm-2 col-form-label">SKU</label>
                     <div class="col-sm-8">
                         <input type="text" id="sku" name="sku" autocomplete="off" placeholder='#sku'
-                            class="form-control form-control-lg">
+                            autocapitalize="off" class="form-control form-control-lg"
+                            value="<?php echo isset($_SESSION['sku']) ? $_SESSION['sku'] : '' ?>">
+                        <span id="sku-error" class="myerror"></span>
 
-                        <span class="myerror">* <?php echo $skuErr; ?></span>
-                        <span class="myerror"><?php echo $invSku; ?></span>
                         <br><br>
 
 
@@ -77,10 +66,11 @@ if (isset($_SESSION['status'])) {
                 <div class="form-group row">
                     <label for="inputPassword" class="col-sm-2 col-form-label">Name</label>
                     <div class="col-sm-8">
-                        <input type="text" id="name" name="name" autocomplete="off" placeholder='#name'
-                            class="form-control form-control-lg">
-                        <span class="myerror">* <?php echo $nameErr; ?></span>
-                        <span class="myerror"> <?php echo $invName; ?></span>
+                        <input type="text" id="name" name="name"
+                            value="<?php echo isset($_SESSION['name']) ? $_SESSION['name'] : '' ?>" autocomplete="off"
+                            placeholder='#name' utocapitalize="off" class="form-control form-control-lg">
+                        <span id="sku-error" class="myerror"></span>
+
                         <br><br>
                     </div>
 
@@ -88,46 +78,78 @@ if (isset($_SESSION['status'])) {
                 <div class="form-group row">
                     <label for="price" class="col-sm-2 col-form-label">Price($)</label>
                     <div class="col-sm-8">
-                        <input type="number" id="price" name="price" autocomplete="off" placeholder='#price'
-                            class="form-control form-control-lg">
+                        <input type="number" id="price"
+                            value="<?php echo isset($_SESSION['price']) ? $_SESSION['price'] : '' ?>" name="price"
+                            autocomplete="off" placeholder='#price' class="form-control form-control-lg"
+                            autocapitalize="off">
 
-                        <span class="myerror">* <?php echo $priceErr; ?></span>
+                        <span class="myerror">
+
+                        </span>
 
                         <br><br>
                     </div>
                 </div>
+
+
                 <div class="form-group row">
-                    <label for="inputPassword" class="col-sm-3 col-form-label">Type Switcher</label>
+                    <label for="type" class="col-sm-3 col-form-label">Type Switcher</label>
 
                     <div class="col-sm-6">
-                        <select id="productType" name="productType" onChange="myNewFunction(this);">
-                            <option id="type_Switcher" value="">Type Switcher
+                        <select name="product_type" id="product_type" class="form-control-sm ">
+                            <option value="">-- Select Product Type --</option>
+                            <option value="dvd">DVD</option>
+                            <option value="furniture">
+                                Furniture </option>
+                            <option value="book">Book
                             </option>
-                            <option id="#DVD" value="DVD">DVD</option>
-                            <option id="#Furniture" value="Furniture">Furniture</option>
-                            <option id="#Book" value="Book">Book</option>
                         </select>
+
+                    </div>
+                </div>
+                <div class="select container2">
+
+                    <div class="form-control-sm">
+                        <span id="type-error" class="myerror"></span>
                     </div>
 
                 </div>
+
+
+
+
                 <!-- class for selected product div -->
+
                 <div class="select container">
+                    <div id="detailsSection">
 
+                    </div>
 
-                    <div class="select display"> </div>
+                    <div>
+                        <span id="mySpan"></span>
+                    </div>
 
                 </div>
-                <div class="save button">
-                    <!-- <input type="submit" value="save" name="submit" btnid="#save-btn" class="btn btn-primary"
+
+
+
+
+
+
+            </div>
+
+
+            <div class="save button">
+                <!-- <input type="submit" value="save" name="submit" btnid="#save-btn" class="btn btn-primary"
                         name="save"> -->
-                    <button type="submit" class="btn btn-primary" value="Submit">Save</button>
-                </div>
+                <button type="submit" class="btn btn-primary" id="save-button" value="Submit">Save</button>
+            </div>
         </form>
     </div>
 
     </div>
     <!-- custom js file link  -->
-    <script src="../js/main.js"> </script>
+    <script src="../js/test.js"> </script>
 
 </body>
 

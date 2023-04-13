@@ -1,29 +1,36 @@
 <?php
 include_once '../autoLoader/classAutoLoader.php';
+include_once '../core/DbHandler.class.php';
+include_once '../validation/FormValidator.class.php';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+session_start();
 
-    $sku = $_POST["sku"];
-    $name = $_POST["name"];
-    $price = $_POST["price"];
-    $size = isset($_POST["size"]) && $_POST["size"] ?? null;
-    $weight = isset($_POST["weight"]) && $_POST["weight"] ?? null;
-    $width = isset($_POST["width"]) && $_POST["width"] ?? null;
-    $length = isset($_POST["length"]) && $_POST["length"] ?? null;
-    $height = isset($_POST["height"]) && $_POST["height"] ?? null;
+if (($_SERVER["REQUEST_METHOD"] == "POST")) {
 
-    //validating empty input values
-    $skuErr = $nameErr = $priceErr = $sizeErr = $weightErr = "";
-    $sku = $name = $price = $size = $weight = "";
+  $_SESSION['sku'] = $_POST['sku'];
+    $_SESSION['product_type'] = $_POST['product_type'];
+    $_SESSION['name'] = $_POST["name"];
+    $_SESSION['price'] = $_POST["price"];
+    $_SESSION['size'] = isset($_POST["size"]) && $_POST["size"] ?? null;
+    $_SESSION['weight'] = isset($_POST["weight"]) && $_POST["weight"] ?? null;
+    $_SESSION['height'] = isset($_POST["height"]) && $_POST["height"] ?? null;
+    $_SESSION['length'] = isset($_POST["length"]) && $_POST["length"] ?? null;
 
-    (empty($_POST["sku"])) ? $skuErr = "SKU is required" : $sku = ($_POST["sku"]);
-    (empty($_POST["name"])) ? $nameErr = "name is required" : $name = ($_POST["name"]);
-    (empty($_POST["price"])) ? $priceErr = "price is required" : $price = ($_POST["price"]);
-    (empty($_POST["size"])) ? $sizeErr = "size is required" : $size = ($_POST["size"]);
-    (empty($_POST["weight"])) ? $weightErr = "weight is required" : $weight = ($_POST["weight"]);
-    (empty($_POST["length"])) ? $lengthErr = "length is required" : $length = ($_POST["length"]);
-    (empty($_POST["width"])) ? $widthErr = "width is required" : $width = ($_POST["width"]);
-    (empty($_POST["height"])) ? $heightErr = "height is required" : $height = ($_POST["height"]);
+    $_SESSION['width'] = isset($_POST["width"]) && $_POST["width"] ?? null;
+
+    $product_classes = [
+        'dvd' => 'DVD',
+        'furniture' => 'Furniture',
+        'book' => 'Book',
+    ];
+
+//validating empty input fields
+
+    // (empty($_POST["product_type"])) ? $typeErr = "* Product Type must be selected" : $typeErr = '' && $type = ($_POST["product_type"]);
+
+    // (empty($_POST["sku"])) ? $skuErr = "SKU is required" : $sku = ($_POST["sku"]);
+    // (empty($_POST["name"])) ? $nameErr = "name is required" : $name = ($_POST["name"]);
+    // (empty($_POST["price"])) ? $priceErr = "price is required" : $price = ($_POST["price"]);
 
     //validating input characters
     $reg_exp = "/[^a-zA-Z0-9-:]+/"; // permitted expression for name input
@@ -32,32 +39,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $invName = $invSku = ""; // Error message for invalid input type
 
-    if (preg_match($reg_exp2, $name)) {
+    if (preg_match($reg_exp2, $_POST["name"])) {
 
         $invName = "Only letters,numbers,:,@ or - is allowed";
 
-    } else if (preg_match($reg_exp, $sku)) {
+    } elseif (preg_match($reg_exp, $_POST["sku"])) {
 
         $invSku = "Only letters,numbers,:,or - is allowed";
 
-    } else {
-        if ($sku && $name && $price && $size) {
-            $dvd = new dvd($sku, $name, $price, $size);
-            $dvd->setConnection();
-            $dvd->insert();
+    }
 
-        } elseif ($sku && $name && $price && $height && $length && $width) {
-            $furniture = new furniture($sku, $name, $price, $height, $length, $width);
-            $furniture->setConnection();
-            $furniture->insert();
+    $type = isset($_POST['product_type']) ? $_POST['product_type'] : null;
+// //Check if the selected product type is valid
+    if (isset($product_classes[$type])) {
+        // Get the class name for the selected product type
+        $product_classname = $product_classes[$type];
+//Create a new product object based on the selected product type get complete form data for each product type
 
-        } elseif ($sku && $name && $price && $weight) {
+        $product = new $product_classname(...array_values($_POST));
 
-            $book = new book($sku, $name, $price, $weight);
-            $book->setConnection();
-            $book->insert();
+        $dbHandler = new DbHandler('localhost', 'root', '', 'abiyu');
 
-        }
+// Save product data to the database
+
+        $product->saveToDatabase($dbHandler);
+        unset($_SESSION['sku']);
+        unset($_SESSION['price']);
+        unset($_SESSION['name']);
+
+        // ... save product data to database ...
 
     }
 
